@@ -3,13 +3,13 @@ import {fetchCategories} from "../fetchers/fetchCategories";
 import {CategoriesGrid} from "../components/CategoriesGrid";
 import {Container} from "../components/Container";
 import {useSearchParams} from "react-router-dom";
-
+import {Breadcrumbs} from "../components/Breadcrumbs";
 
 function findNode(id, category) {
-  if (category.id === id) {
+  if (category?.id+'' === id+'') {
     return category
   }
-  if (category.childCategories) {
+  if (category?.childCategories) {
     for (let childCategory of category.childCategories) {
       const node = findNode(id, childCategory);
       if (node) {
@@ -17,6 +17,14 @@ function findNode(id, category) {
       }
     }
   }
+}
+
+function getCategoryPath(id, category) {
+  const node = findNode(id, category);
+  if (!id || !node) {
+    return [category]
+  }
+  return [...getCategoryPath(node.parentId, category), node]
 }
 
 export const HomePage = () => {
@@ -39,11 +47,21 @@ export const HomePage = () => {
     return findNode(+categoryId, category)
   }, [category, categoryId])
 
-  console.log(currentCategory)
+  const links = useMemo(() => {
+    if (!category) return [];
+
+    return getCategoryPath(categoryId, category).map(category => ({
+      label: category.name,
+      to: category.id ? '/home?categoryId='+category.id : '/home',
+    }));
+  }, [categoryId, category])
 
 
   return (
     <Container style={{ marginTop: '20px' }}>
+      <div style={{ marginBottom: '20px' }}>
+        <Breadcrumbs links={links} />
+      </div>
       <CategoriesGrid categories={currentCategory?.childCategories} />
     </Container>
   )
