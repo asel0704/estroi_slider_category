@@ -10,9 +10,9 @@ const Grid = styled.div`
 
 export function CategoriesGrid({ categories }) {
   return (
-    <Grid>
+    <Grid >
       {categories?.map((category) => (
-        <LinkBase to={`/home?categoryId=${category.id}`}>
+        <LinkBase to={`/category/`}>
           <CategoryItem>
             {category.name}
             <CategoryCounter>

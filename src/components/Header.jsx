@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import {Container} from "./Container";
+import {Box, Link} from "@mui/material";
 
 const Wrapper = styled.div`
   height: 60px;
@@ -15,10 +16,13 @@ const StyledContainer = styled(Container)`
 
 export const Header = () => {
   return (
-    <Wrapper>
-      <StyledContainer>
-        e-stroi.kz
-      </StyledContainer>
-    </Wrapper>
-  )
+    <Box>
+      <Wrapper>
+        <StyledContainer>
+              e-stroi.kz
+          </StyledContainer>
+           </Wrapper>
+        
+      </Box>
+    )
 }

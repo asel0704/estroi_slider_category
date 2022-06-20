@@ -4,6 +4,9 @@ import {CategoriesGrid} from "../components/CategoriesGrid";
 import {Container} from "../components/Container";
 import {useSearchParams} from "react-router-dom";
 import {Breadcrumbs} from "../components/Breadcrumbs";
+import {Slider} from "../components/Slider"
+import { LinkBase } from "../components/LinkBase";
+
 
 function findNode(id, category) {
   if (category?.id+'' === id+'') {
@@ -42,6 +45,7 @@ export const HomePage = () => {
     })
   }, [])
 
+
   const currentCategory = useMemo(() => {
     if (!categoryId || !category) return category
     return findNode(+categoryId, category)
@@ -58,11 +62,13 @@ export const HomePage = () => {
 
 
   return (
-    <Container style={{ marginTop: '20px' }}>
+      <Container style={{ marginTop: '20px' }}>
+         <Slider />
       <div style={{ marginBottom: '20px' }}>
         <Breadcrumbs links={links} />
       </div>
       <CategoriesGrid categories={currentCategory?.childCategories} />
+      <LinkBase to={`/category`} />
     </Container>
   )
 }

@@ -9,7 +9,17 @@ export const CategoryItem = styled.div`
   display: flex;
   align-items: center;
 `
+export const ProductItem= styled.div`
+height: 200px;
+padding-left: 10px;
+padding-right: 10px;
+background: #EAEAEA;
+border-radius: 4px;
+display: flex;
+align-items: center;
+flex-flow: row wrap;  
 
+`
 export const CategoryCounter = styled.div`
   height: 32px;
   width: 32px;
